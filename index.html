@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khóa học Lập trình AI cho Trẻ Em — Dashboard 5 Phase</title>
+<style>
+:root{
+    --text:#eaf3ff;--muted:#a3b9d3;--bg:#080c14;--card:#111b2c;
+    --accent1:#00ff9d;--accent2:#5ec6ff;--accent3:#ff9d5e;
+    --accent4:#a55eff;--accent5:#ff5ea1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:'Segoe UI',Roboto,Arial;
+    background:radial-gradient(900px 600px at 10% -10%,rgba(94,198,255,.1),transparent),
+                radial-gradient(1000px 600px at 80% 120%,rgba(0,255,157,.08),transparent),
+                linear-gradient(180deg,#060a12,#0d1526);
+    color:var(--text);
+    overflow-x:hidden;
+    min-height:100vh;
+}
+
+/* ===== Header ===== */
+header{
+    text-align:center;padding:40px 20px 20px;position:relative;
+}
+header h1{
+    font-size:32px;background:linear-gradient(90deg,var(--accent2),var(--accent1));
+    -webkit-background-clip:text;color:transparent;letter-spacing:1px;
+    animation: textPulse 4s ease-in-out infinite alternate;
+    margin-bottom: 10px; 
+}
+@keyframes textPulse {
+    0% { filter: drop-shadow(0 0 0px var(--accent2)); opacity: 1; }
+    100% { filter: drop-shadow(0 0 8px var(--accent2)); opacity: 0.98; }
+}
+
+/* Viền hologram nhẹ cho header */
+header::after{
+    content:"";position:absolute;left:50%;transform:translateX(-50%);
+    bottom:8px;width:min(92%,1100px);height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent2),transparent);
+    opacity:.4;filter:blur(.3px);
+}
+
+/* Tag mô tả giữ nguyên */
+.header-description-tag {
+    display: inline-block;
+    max-width: 720px;
+    margin: 10px auto 20px auto; 
+    font-size: 15px;
+    font-style: italic;
+    color: var(--accent3); 
+    padding: 8px 15px;
+    border: 1px solid var(--accent3);
+    border-radius: 10px;
+    background: rgba(255, 157, 94, 0.1);
+    box-shadow: 0 0 15px rgba(255, 157, 94, 0.3);
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ===== Bố cục chính ===== */
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:28px;
+    padding:40px 20px 80px;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 650px) {
+    header h1 { font-size: 26px; }
+    .header-description-tag {
+        font-size: 14px; margin: 10px 10px 20px 10px; max-width: 95%;
+    }
+    .container { grid-template-columns: 1fr; padding: 20px 15px 50px 15px; gap: 20px; }
+    .card { padding: 20px; border-radius: 15px; }
+}
+
+/* ===== Card base ===== */
+.card{
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:28px 22px;position:relative;overflow:hidden;
+    transition:.5s;
+}
+.card:hover{transform:translateY(-6px)}
+.phase-num{font-size:13px;color:var(--muted);letter-spacing:1px;margin-bottom:8px}
+h2{font-size:20px;margin-bottom:6px;color:#fff}
+p{font-size:15px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+strong{color:#fff}
+.btn{
+    display:inline-block;margin-top:10px;padding:9px 15px;border-radius:10px;
+    text-decoration:none;background:linear-gradient(90deg,var(--glow1),var(--glow2));
+    color:#000;font-weight:600;transition:.3s;
+    animation: btnGlow 3s ease-in-out infinite;
+}
+.btn:hover{transform:scale(1.05);box-shadow:0 0 16px var(--glow1)}
+@keyframes btnGlow { 0%,100% { box-shadow: 0 0 8px rgba(0,0,0,0.5);} 50% { box-shadow: 0 0 18px var(--glow1);} }
+
+/* Tuổi */
+.age{
+    position:absolute;top:20px;right:20px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+    padding:4px 10px;border-radius:8px;font-size:13px;color:var(--muted);
+    backdrop-filter:blur(8px);
+}
+
+/* ===== ICON & animation gốc (giữ nguyên tối giản) ===== */
+.icon{
+    font-size:42px;margin-bottom:8px;text-shadow:0 0 14px rgba(255,255,255,.3);
+    display:inline-block; position:relative; width:42px; height:42px;
+}
+.icon.controller{ animation: controllerWiggle 1s ease-in-out infinite alternate; transform-origin:center bottom; font-size:38px;}
+@keyframes controllerWiggle { 0%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}100%{transform:rotate(0)} }
+.icon.earth-orbit{ font-size:0; display:block; width:60px; height:60px; margin:0 auto 8px auto; position:relative; border-radius:50%;}
+.icon.earth-orbit::before{ content:'☀️'; font-size:30px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;}
+.icon.earth-orbit::after{ content:'🌍'; font-size:20px; position:absolute; top:0; left:50%; transform:translateX(-50%); animation:orbit 8s linear infinite; transform-origin:50% 30px; z-index:1;}
+@keyframes orbit { 0%{ transform: rotate(0deg) translateX(25px) rotate(0deg);} 100%{ transform: rotate(360deg) translateX(25px) rotate(-360deg);} }
+.icon.robot-walk{ animation: robotWalk 4s ease-in-out infinite alternate;}
+@keyframes robotWalk { 0%{transform:translateX(-15px) rotateY(0)}50%{transform:translateX(15px) rotateY(0)}50.1%{transform:translateX(15px) rotateY(180deg)}100%{transform:translateX(-15px) rotateY(180deg)} }
+.icon.rocket-launch{ animation: rocketLaunch 6s ease-out infinite; transform-origin:center bottom;}
+@keyframes rocketLaunch { 0%{transform:translateY(0) rotate(0);opacity:1}20%{transform:translateY(-50px) rotate(5deg)}40%{transform:translateY(-100px) rotate(-5deg)}60%{transform:translateY(-150px)}70%{transform:translateY(-200px);opacity:0}71%{transform:translateY(50px);opacity:0}100%{transform:translateY(0);opacity:1} }
+
+/* ===== Phase color ===== */
+.card.phase1{--glow1:var(--accent1);--glow2:var(--accent2)}
+.card.phase2{--glow1:var(--accent3);--glow2:var(--accent2)}
+.card.phase3{--glow1:#5ef8ff;--glow2:#fff08b}
+.card.phase4{--glow1:var(--accent4);--glow2:var(--accent2)}
+.card.phase5{--glow1:var(--accent5);--glow2:var(--accent2)}
+
+/* ===== AI Scanning effect (nhẹ, tinh tế) ===== */
+.card::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient( to right, transparent 0%, rgba(255,255,255,.06) 50%, transparent 100% );
+    transform:translateX(-100%); 
+    animation: scan 6.5s linear infinite;
+}
+@keyframes scan { 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
+
+/* ===== Footer ===== */
+footer{
+    text-align:center;padding:40px 10px 60px;color:var(--muted);
+    font-size:14px;border-top:1px solid rgba(255,255,255,.1);
+}
+footer strong{color:var(--accent2)}
+
+/* ===== Watermark bảo mật (A — nhẹ) ===== */
+.watermark{
+    position:fixed;bottom:12px;right:16px;z-index:50;
+    font-size:11px;letter-spacing:1.2px;color:rgba(234,243,255,0.55);
+    text-transform:uppercase; user-select:none;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);
+    padding:6px 10px; border-radius:8px; backdrop-filter: blur(6px);
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Khóa học Lập trình AI cho Trẻ Em</h1>
+    <span class="header-description-tag">Hành trình 5 giai đoạn phát triển tư duy công nghệ – giúp trẻ hiểu AI, rèn logic và sáng tạo nên sản phẩm đầu tiên của mình.</span>
+</header>
+
+<main class="container">
+
+    <div class="card phase1">
+        <span class="age">4–6 tuổi</span>
+        <div class="phase-num">PHASE 1</div>
+        <div class="icon">🎨</div>
+        <h2>Sơ cấp 1 – AI Storybook</h2>
+        <p><strong>Chủ đề:</strong> Làm bạn với AI – logic đơn giản, phân loại, kể chuyện.</p>
+        <p><strong>Sản phẩm:</strong> “AI Storybook – Con và Người bạn Thông minh đầu tiên”. Bé vẽ nhân vật, AI minh họa, bé kể lại bằng giọng nói.</p>
+        <p><strong>Hình thức:</strong> PDF in + QR video kể truyện.</p>
+        <a href="1index.html" class="btn">Xem thêm</a>
+    </div>
+
+    <div class="card phase2">
+        <span class="age">6–8 tuổi</span>
+        <div class="phase-num">PHASE 2</div>
+        <div class="icon controller">🕹️</div>
+        <h2>Sơ cấp 2 – Game Đầu Tiên</h2>
+        <p><strong>Chủ đề:</strong> Làm quen Scratch / Blockly, học điều kiện “nếu – thì”.</p>
+        <p><strong>Sản phẩm:</strong> Mini-game hoặc website tĩnh bé tự lập trình.</p>
+        <p><strong>Hình thức:</strong> Xuất HTML + in QR “Chơi thử game của con”.</p>
+        <a href="2index.html" class="btn">Xem thêm</a>
+    </div>
+
+    <div class="card phase3">
+        <span class="age">8–10 tuổi</span>
+        <div class="phase-num">PHASE 3</div>
+        <div class="icon earth-orbit"></div>
+        <h2>Trung cấp 1 – Website của Con</h2>
+        <p><strong>Chủ đề:</strong> Thiết kế và lập trình website cơ bản.</p>
+        <p><strong>Sản phẩm:</strong> “Trang web nói về con” – website thật đầu tiên do bé tự viết nội dung.</p>
+        <p><strong>Hình thức:</strong> Link web + poster in trang chủ.</p>
+        <a href="3index.html" class="btn">Xem thêm</a>
+    </div>
+
+    <div class="card phase4">
+        <span class="age">10–12 tuổi</span>
+        <div class="phase-num">PHASE 4</div>
+        <div class="icon robot-walk">🤖</div>
+        <h2>Trung cấp 2 – Bạn AI của Con</h2>
+        <p><strong>Chủ đề:</strong> Web AI cơ bản, robot mô phỏng.</p>
+        <p><strong>Sản phẩm:</strong> “Bạn AI của con” – website/robot mô phỏng phản hồi lời nói, chuyển động.</p>
+        <p><strong>Hình thức:</strong> Video demo + QR xem bản chạy thử.</p>
+        <a href="4index.html" class="btn">Xem thêm</a>
+    </div>
+
+    <div class="card phase5">
+        <span class="age">12+ tuổi</span>
+        <div class="phase-num">PHASE 5</div>
+        <div class="icon rocket-launch">🚀</div>
+        <h2>Cao cấp – My First AI App</h2>
+        <p><strong>Chủ đề:</strong> Lập trình Python + AI API, sáng tạo ứng dụng thực tế.</p>
+        <p><strong>Sản phẩm:</strong> “My First AI App” – ứng dụng đầu tiên bé tự viết (AI viết thư, chatbot mini …).</p>
+        <p><strong>Hình thức:</strong> Link app thật + chứng nhận hoàn thành.</p>
+        <a href="5index.html" class="btn">Xem thêm</a>
+    </div>
+
+</main>
+
+<footer>
+    <p><strong>© 2025 HYPER ONE</strong></p>
+    <p>Từ “🎨 AI Storybook” đến “🚀 My First AI App”, mỗi sản phẩm là một dấu mốc tự hào của gia đình.</p>
+</footer>
+
+<!-- Watermark bảo mật (A — nhẹ) -->
+<div class="watermark">🔒 TÀI LIỆU MẬT – KHÔNG PHỔ BIẾN RA NGOÀI</div>
+
+</body>
+</html>
