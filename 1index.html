@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase 1 — Sơ cấp 1 – AI Storybook</title>
+<style>
+:root{--text:#eaf3ff;--muted:#a3b9d3;--bg:#080c14;--card:#111b2c;--accent1:#00ff9d;--accent2:#5ec6ff;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Roboto,Arial;background:linear-gradient(180deg,#060a12,#0d1526);color:var(--text);min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
+a{color:var(--accent2);text-decoration:none}
+h1{font-size:26px;margin:10px 0 8px;background:linear-gradient(90deg,var(--accent2),var(--accent1));-webkit-background-clip:text;color:transparent}
+.header-note{font-size:14px;color:var(--muted);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 14px;background:rgba(255,255,255,.04);margin-bottom:18px}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px 16px;margin-top:14px;position:relative;overflow:hidden}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(to right,transparent,rgba(255,255,255,.06),transparent);transform:translateX(-110%);animation:scan 7s linear infinite}
+@keyframes scan{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.section-title{font-size:18px;margin:8px 0 6px}
+p{color:var(--muted);line-height:1.6;margin:6px 0}
+.back{display:inline-block;margin-top:16px;border:1px solid var(--accent2);padding:8px 12px;border-radius:10px}
+.watermark{position:fixed;bottom:12px;right:16px;font-size:11px;letter-spacing:1.2px;color:rgba(234,243,255,0.55);text-transform:uppercase;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);padding:6px 10px;border-radius:8px;backdrop-filter: blur(6px)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">← Quay lại Dashboard</a>
+  <h1>PHASE 1 — Sơ cấp 1 – AI Storybook</h1>
+  <div class="header-note">Độ tuổi: <strong>4–6 tuổi</strong></div>
+
+  <div class="card">
+    <div class="section-title">Chủ đề</div>
+    <p><strong>Làm bạn với AI</strong> – logic đơn giản, phân loại, kể chuyện.</p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Sản phẩm</div>
+    <p><strong>“AI Storybook – Con và Người bạn Thông minh đầu tiên”.</strong> Bé vẽ nhân vật, AI minh họa, bé kể lại bằng giọng nói.</p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Hình thức</div>
+    <p><strong>PDF in + QR video kể truyện.</strong></p>
+  </div>
+</div>
+
+<div class="watermark">🔒 TÀI LIỆU MẬT – KHÔNG PHỔ BIẾN RA NGOÀI</div>
+</body>
+</html>
