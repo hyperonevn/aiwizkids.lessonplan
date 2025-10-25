@@ -1,48 +1,384 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Phase 1 — Sơ cấp 1 – AI Storybook</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AI Storybook — Sơ cấp 1 | Làm bạn với AI</title>
+<meta name="description" content="Giáo trình Sơ cấp 1 — AI Storybook: Làm bạn với AI. 5 phase giúp trẻ học logic, phân loại và kể chuyện. Sản phẩm: PDF in + QR video kể truyện.">
+
+<!-- ====== FONT (system fallback) ====== -->
 <style>
-:root{--text:#eaf3ff;--muted:#a3b9d3;--bg:#080c14;--card:#111b2c;--accent1:#00ff9d;--accent2:#5ec6ff;}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Roboto,Arial;background:linear-gradient(180deg,#060a12,#0d1526);color:var(--text);min-height:100vh}
-.wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
-a{color:var(--accent2);text-decoration:none}
-h1{font-size:26px;margin:10px 0 8px;background:linear-gradient(90deg,var(--accent2),var(--accent1));-webkit-background-clip:text;color:transparent}
-.header-note{font-size:14px;color:var(--muted);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 14px;background:rgba(255,255,255,.04);margin-bottom:18px}
-.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px 16px;margin-top:14px;position:relative;overflow:hidden}
-.card::after{content:"";position:absolute;inset:0;background:linear-gradient(to right,transparent,rgba(255,255,255,.06),transparent);transform:translateX(-110%);animation:scan 7s linear infinite}
-@keyframes scan{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
-.section-title{font-size:18px;margin:8px 0 6px}
-p{color:var(--muted);line-height:1.6;margin:6px 0}
-.back{display:inline-block;margin-top:16px;border:1px solid var(--accent2);padding:8px 12px;border-radius:10px}
-.watermark{position:fixed;bottom:12px;right:16px;font-size:11px;letter-spacing:1.2px;color:rgba(234,243,255,0.55);text-transform:uppercase;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);padding:6px 10px;border-radius:8px;backdrop-filter: blur(6px)}
+  :root{
+    --bg:#070b13;
+    --bg-2:#0b1220;
+    --ink:#ecf3ff;
+    --muted:#9bb2cc;
+    --line:#1d2736;
+    --ai:#2eaaff;        /* Hyper-ish blue */
+    --ai-2:#8bffd8;      /* teal accent */
+    --gold:#ffb84d;      /* badge color */
+    --ok:#00d28f;
+    --danger:#ff4d6d;
+    --radius:16px;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  * { box-sizing:border-box }
+  html,body { height:100% }
+  html,body {
+    margin:0;
+    color:var(--ink);
+    background:
+      radial-gradient(1000px 600px at 70% -10%, #14283d 0%, #0b1220 55%, #070b13 100%),
+      linear-gradient(180deg, #091221 0%, #070b13 100%);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+  a { color:var(--ai) }
+  img { max-width:100%; display:block }
+
+  /* ====== LAYOUT ====== */
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:24px;
+  }
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:12px 0 8px;
+    border-bottom:1px dashed var(--line);
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+  }
+  .brand .logo{
+    width:40px;height:40px;border-radius:10px;
+    background:linear-gradient(135deg,var(--ai),var(--ai-2));
+    box-shadow:0 8px 20px rgba(46,170,255,.35);
+  }
+  .brand h1{
+    margin:0;font-size:18px;line-height:1.2;font-weight:700;
+    letter-spacing:.2px;
+  }
+  .tagline{ color:var(--muted); font-size:13px }
+
+  .cta{
+    display:flex; gap:10px; flex-wrap:wrap;
+  }
+  .btn{
+    appearance:none; border:1px solid rgba(255,255,255,.12); color:var(--ink);
+    background:linear-gradient(180deg,#0e1828,#0b1422);
+    padding:10px 14px; border-radius:12px; font-weight:600; font-size:14px;
+    cursor:pointer; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(46,170,255,.2); border-color:rgba(46,170,255,.5) }
+  .btn.primary{ border-color:transparent; background:linear-gradient(135deg,var(--ai),var(--ai-2)); color:#021018 }
+
+  /* ====== HERO ====== */
+  .hero{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:22px; padding:26px 0 10px;
+  }
+  .hero .card{
+    border:1px solid var(--line); border-radius:var(--radius);
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+    box-shadow:var(--shadow);
+    padding:18px; position:relative; overflow:hidden;
+  }
+  .hero h2{ margin:0 0 12px; font-size:22px }
+  .hero p{ margin:8px 0; color:var(--muted) }
+
+  /* AI scanning rim */
+  .scan{
+    position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  }
+  .scan::before{
+    content:""; position:absolute; inset:-2px;
+    border-radius:inherit;
+    background:
+      conic-gradient(from 0deg, rgba(46,170,255,.0) 0deg, rgba(46,170,255,.5) 90deg, rgba(139,255,216,.5) 140deg, rgba(46,170,255,.0) 220deg);
+    filter:blur(8px); opacity:.35; animation:spin 8s linear infinite;
+  }
+  @keyframes spin { to { transform:rotate(1turn) } }
+
+  .hero .keypoints{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;
+  }
+  .kp{
+    padding:12px;border:1px solid var(--line);border-radius:12px;
+    background:linear-gradient(180deg,#0b1524,#0a1320);
+    font-size:13.5px; color:var(--ink);
+  }
+  .kp b{ color:#d7e7ff }
+  .kp small{ color:var(--muted) }
+
+  /* ====== PHASE GRID ====== */
+  .section-title{
+    margin:26px 0 14px; font-size:18px; letter-spacing:.3px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title .dot{
+    width:8px;height:8px;border-radius:99px;background:linear-gradient(135deg,var(--ai),var(--ai-2));
+    box-shadow:0 0 16px rgba(46,170,255,.6)
+  }
+
+  .grid{
+    display:grid; gap:14px;
+    grid-template-columns:repeat(3,1fr);
+  }
+  @media (max-width:990px){ .hero{ grid-template-columns:1fr } .grid{ grid-template-columns:1fr 1fr } }
+  @media (max-width:640px){ .grid{ grid-template-columns:1fr } }
+
+  .phase{
+    position:relative; overflow:hidden;
+    border:1px solid var(--line); border-radius:16px; padding:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .phase:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(0,0,0,.4); border-color:rgba(46,170,255,.35) }
+  .phase .head{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px;
+  }
+  .label{
+    display:inline-flex; align-items:center; gap:8px;
+    font-weight:700; font-size:14px;
+  }
+  .label .badge{
+    padding:4px 8px; border-radius:10px; font-size:12px; font-weight:700; color:#031018;
+    background:linear-gradient(135deg,var(--ai),var(--ai-2));
+  }
+  .age{ color:var(--muted); font-size:12px }
+  .phase ul{ margin:8px 0 0 18px; padding:0; }
+  .phase li{ margin:6px 0; color:var(--ink); }
+  .phase .result{
+    margin-top:10px; font-size:13.5px; color:#d7e7ff;
+    border-top:1px dashed var(--line); padding-top:8px;
+  }
+
+  /* scanning light on phase */
+  .phase::after{
+    content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+    box-shadow:inset 0 0 0 1px rgba(46,170,255,.18), 0 0 25px rgba(46,170,255,.06);
+  }
+  .phase .scan{ opacity:.25 }
+
+  /* ====== SUMMARY TABLE ====== */
+  .table{
+    overflow:auto; border:1px solid var(--line); border-radius:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+  }
+  table{ width:100%; border-collapse:collapse; min-width:720px }
+  th,td{ padding:12px; border-bottom:1px solid #142131; text-align:left; font-size:14px }
+  th{ color:#ddedff; background:#0c1624; position:sticky; top:0; z-index:1 }
+  tr:last-child td{ border-bottom:none }
+  .pill{ display:inline-block; padding:2px 8px; font-size:12px; border-radius:999px; background:#0f1e31; border:1px solid #1e3047 }
+
+  /* ====== FOOTER ====== */
+  footer{
+    margin:30px 0 10px; padding-top:10px; border-top:1px dashed var(--line); color:var(--muted); font-size:12px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  }
+  .note{ color:var(--muted); font-size:13px }
+  .ok{ color:var(--ok) }
+  .danger{ color:var(--danger) }
+
+  /* ====== LITTLE EMOJIS FLOAT (subtle) ====== */
+  .float{
+    position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.12;
+    background:
+      radial-gradient(10px 10px at 15% 25%, #2eaaff 0%, transparent 60%),
+      radial-gradient(7px 7px at 80% 20%, #8bffd8 0%, transparent 60%),
+      radial-gradient(8px 8px at 70% 70%, #2eaaff 0%, transparent 60%),
+      radial-gradient(6px 6px at 30% 80%, #8bffd8 0%, transparent 60%);
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift { from{ transform:translateY(-6px) } to{ transform:translateY(6px) } }
 </style>
 </head>
 <body>
+
+<div class="float" aria-hidden="true"></div>
+
 <div class="wrap">
-  <a href="index.html" class="back">← Quay lại Dashboard</a>
-  <h1>PHASE 1 — Sơ cấp 1 – AI Storybook</h1>
-  <div class="header-note">Độ tuổi: <strong>4–6 tuổi</strong></div>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>AI Storybook — Sơ cấp 1</h1>
+        <div class="tagline">Chủ đề: <b>Làm bạn với AI</b> • Sản phẩm: <b>PDF in + QR video kể truyện</b></div>
+      </div>
+    </div>
+    <nav class="cta">
+      <button class="btn primary" onclick="document.getElementById('phase').scrollIntoView({behavior:'smooth'})">Bắt đầu 5 Phase</button>
+      <button class="btn" onclick="document.getElementById('summary').scrollIntoView({behavior:'smooth'})">Tổng kết</button>
+    </nav>
+  </header>
 
-  <div class="card">
-    <div class="section-title">Chủ đề</div>
-    <p><strong>Làm bạn với AI</strong> – logic đơn giản, phân loại, kể chuyện.</p>
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Giới thiệu">
+    <div class="card">
+      <div class="scan"></div>
+      <h2>🎯 Mục tiêu chương trình</h2>
+      <p>Trẻ hiểu <b>AI là gì</b> qua ví dụ gần gũi; tập <b>phân loại – mô tả – kể chuyện</b> logic; kết hợp sáng tạo cá nhân và trợ giúp từ AI.</p>
+      <div class="keypoints">
+        <div class="kp">✅ Kết quả cuối: <b>01 Storybook</b> có hình minh hoạ + <b>video giọng thật</b> của bé.</div>
+        <div class="kp">🛠️ Công cụ: vẽ tay/tablet + AI minh hoạ + ghi âm/ghi hình.<br><small>In PDF kèm QR tới video.</small></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="scan"></div>
+      <h2>📦 Gói sản phẩm xuất bản</h2>
+      <ul>
+        <li>📖 PDF Storybook sẵn sàng in (A4/A5).</li>
+        <li>🔗 QR code dẫn tới video kể chuyện.</li>
+        <li>🏅 Chứng nhận: <b>“Nhà kể chuyện AI Sơ cấp”</b>.</li>
+      </ul>
+      <div style="display:flex; gap:10px; margin-top:12px">
+        <button class="btn primary" onclick="alert('Placeholder: Tạo PDF & QR sau khi hoàn tất các phase.')">Tạo PDF + QR</button>
+        <button class="btn" onclick="alert('Placeholder: Mẫu in & checklist giáo viên.')">Tải mẫu in</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5 PHASES ===== -->
+  <h3 id="phase" class="section-title"><span class="dot"></span> Lộ trình 5 PHASE</h3>
+
+  <div class="grid">
+    <!-- Phase 1 -->
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="head">
+        <div class="label">🧩 <span class="badge">Phase 1</span> Làm quen & Khám phá AI</div>
+        <div class="age">Tuổi: 6–8</div>
+      </div>
+      <ul>
+        <li>📺 Xem ví dụ “AI quanh ta” (robot, tìm kiếm, trợ lý).</li>
+        <li>🎲 Chơi “Người hay Máy?” – đoán ai trả lời nhanh hơn.</li>
+        <li>🗣️ Trò chuyện: “Bạn AI của con sẽ giúp gì?”</li>
+      </ul>
+      <div class="result">🎨 Kết quả: bé vẽ <b>chân dung “Người bạn AI đầu tiên”</b>.</div>
+    </article>
+
+    <!-- Phase 2 -->
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="head">
+        <div class="label">🧠 <span class="badge">Phase 2</span> Học cách nghĩ logic</div>
+        <div class="age">Tuổi: 6–8</div>
+      </div>
+      <ul>
+        <li>🧺 Phân loại đồ vật theo <i>màu/công dụng/hình dáng</i>.</li>
+        <li>🔗 Trò “Nếu… thì…” (If–Then) đơn giản.</li>
+        <li>🤖 Chọn nhân vật AI: robot/mèo nói chuyện/bóng đèn thông minh…</li>
+      </ul>
+      <div class="result">🗺️ Kết quả: <b>mindmap nhân vật</b> & nhiệm vụ.</div>
+    </article>
+
+    <!-- Phase 3 -->
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="head">
+        <div class="label">🎨 <span class="badge">Phase 3</span> Vẽ & minh hoạ cùng AI</div>
+        <div class="age">Tuổi: 7–9</div>
+      </div>
+      <ul>
+        <li>✍️ Bé vẽ nhân vật bằng tay hoặc tablet.</li>
+        <li>📷 Chụp & upload để AI “biến tấu” theo mô tả.</li>
+        <li>🎨 Chọn phong cách: manga, chibi, cartoon…</li>
+      </ul>
+      <div class="result">🖼️ Kết quả: <b>3–5 hình</b> nhân vật + bối cảnh.</div>
+    </article>
+
+    <!-- Phase 4 -->
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="head">
+        <div class="label">📖 <span class="badge">Phase 4</span> Kể chuyện cùng AI</div>
+        <div class="age">Tuổi: 7–9</div>
+      </div>
+      <ul>
+        <li>🏗️ Học cấu trúc: <b>Mở đầu – Cao trào – Kết</b>.</li>
+        <li>🎙️ Bé kể “Ngày đầu gặp Bạn AI” bằng giọng thật.</li>
+        <li>🤝 AI gợi ý chỉnh lời kể nhưng giữ <i>giọng của bé</i>.</li>
+      </ul>
+      <div class="result">🎬 Kết quả: file truyện có <b>text + audio/video</b>.</div>
+    </article>
+
+    <!-- Phase 5 -->
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="head">
+        <div class="label">🚀 <span class="badge">Phase 5</span> Xuất bản & Chia sẻ</div>
+        <div class="age">Tuổi: 7–9</div>
+      </div>
+      <ul>
+        <li>🧩 Ghép hình + giọng kể + chữ thành <b>PDF Storybook</b>.</li>
+        <li>🔗 Gắn <b>QR code</b> dẫn tới video kể chuyện.</li>
+        <li>🎉 Lễ “Ra mắt sách AI đầu tiên của con”.</li>
+      </ul>
+      <div class="result">🏅 Kết quả: Chứng nhận <b>Nhà kể chuyện AI Sơ cấp</b>.</div>
+    </article>
   </div>
 
-  <div class="card">
-    <div class="section-title">Sản phẩm</div>
-    <p><strong>“AI Storybook – Con và Người bạn Thông minh đầu tiên”.</strong> Bé vẽ nhân vật, AI minh họa, bé kể lại bằng giọng nói.</p>
+  <!-- ===== SUMMARY TABLE ===== -->
+  <h3 id="summary" class="section-title"><span class="dot"></span> Tổng kết nhanh</h3>
+  <div class="table">
+    <table role="table">
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Tên</th>
+          <th>Trọng tâm</th>
+          <th>Sản phẩm</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill">1</span></td>
+          <td>Làm quen AI</td>
+          <td>Hiểu khái niệm, tưởng tượng bạn AI</td>
+          <td>Vẽ chân dung bạn AI</td>
+        </tr>
+        <tr>
+          <td><span class="pill">2</span></td>
+          <td>Logic vui</td>
+          <td>Phân loại – If/Then</td>
+          <td>Mindmap nhân vật</td>
+        </tr>
+        <tr>
+          <td><span class="pill">3</span></td>
+          <td>Minh hoạ cùng AI</td>
+          <td>Vẽ tay + AI minh hoạ</td>
+          <td>Bộ hình minh hoạ</td>
+        </tr>
+        <tr>
+          <td><span class="pill">4</span></td>
+          <td>Kể chuyện</td>
+          <td>Giọng kể + 3 hồi</td>
+          <td>File truyện + audio/video</td>
+        </tr>
+        <tr>
+          <td><span class="pill">5</span></td>
+          <td>Xuất bản</td>
+          <td>Tự tin chia sẻ</td>
+          <td>PDF + QR video</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="card">
-    <div class="section-title">Hình thức</div>
-    <p><strong>PDF in + QR video kể truyện.</strong></p>
-  </div>
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div>© 2025 HYPER ONE</div>
+    <div class="note">Gợi ý: Sau khi hoàn tất Phase 4, nhấn <span class="ok">“Tạo PDF + QR”</span> để đóng gói sản phẩm cuối.</div>
+  </footer>
 </div>
 
-<div class="watermark">🔒 TÀI LIỆU MẬT – KHÔNG PHỔ BIẾN RA NGOÀI</div>
+<!-- ===== OPTIONAL JS (placeholders for future wiring) ===== -->
+<script>
+  // Placeholder: bạn có thể nối tính năng tạo PDF/QR thật ở đây.
+  // Ví dụ:
+  // - Dùng html2pdf.js để xuất PDF.
+  // - Dùng một thư viện QR (qrcodejs) để render QR video.
+</script>
 </body>
 </html>
