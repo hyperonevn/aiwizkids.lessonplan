@@ -1,48 +1,155 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Phase 2 — Sơ cấp 2 – Game Đầu Tiên</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sơ cấp 2 – Game Đầu Tiên | AI Storybook</title>
+<meta name="description" content="AI Storybook – Sơ cấp 2: Làm quen Scratch / Blockly, học điều kiện nếu–thì, tự lập trình mini-game đầu tiên.">
+
 <style>
-:root{--text:#eaf3ff;--muted:#a3b9d3;--bg:#080c14;--card:#111b2c;--accent1:#00ff9d;--accent2:#5ec6ff}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Roboto,Arial;background:linear-gradient(180deg,#060a12,#0d1526);color:var(--text);min-height:100vh}
-.wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
-a{color:var(--accent2);text-decoration:none}
-h1{font-size:26px;margin:10px 0 8px;background:linear-gradient(90deg,var(--accent2),var(--accent1));-webkit-background-clip:text;color:transparent}
-.header-note{font-size:14px;color:var(--muted);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 14px;background:rgba(255,255,255,.04);margin-bottom:18px}
-.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px 16px;margin-top:14px;position:relative;overflow:hidden}
-.card::after{content:"";position:absolute;inset:0;background:linear-gradient(to right,transparent,rgba(255,255,255,.06),transparent);transform:translateX(-110%);animation:scan 7s linear infinite}
-@keyframes scan{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
-.section-title{font-size:18px;margin:8px 0 6px}
-p{color:var(--muted);line-height:1.6;margin:6px 0}
-.back{display:inline-block;margin-top:16px;border:1px solid var(--accent2);padding:8px 12px;border-radius:10px}
-.watermark{position:fixed;bottom:12px;right:16px;font-size:11px;letter-spacing:1.2px;color:rgba(234,243,255,0.55);text-transform:uppercase;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);padding:6px 10px;border-radius:8px;backdrop-filter: blur(6px)}
+  :root {
+    --bg: #f7fbff;
+    --ink: #1a1f36;
+    --muted: #667799;
+    --ai-blue: #2eaaff;
+    --ai-orange: #ffb84d;
+    --card: #ffffff;
+    --line: #e0e8f0;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  header {
+    text-align: center;
+    padding: 40px 16px 20px;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+    color: var(--ai-blue);
+    margin-bottom: 8px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .section {
+    max-width: 800px;
+    margin: 40px auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 32px;
+  }
+
+  .section h2 {
+    color: var(--ai-orange);
+    font-size: 1.4rem;
+    margin-top: 0;
+  }
+
+  .section ul {
+    padding-left: 20px;
+    line-height: 1.6;
+  }
+
+  .highlight {
+    background: linear-gradient(120deg, #2eaaff22, #ffb84d22);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin: 20px 0;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .cta button {
+    background: var(--ai-blue);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+
+  .cta button:hover {
+    background: var(--ai-orange);
+    transform: scale(1.05);
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px 0 50px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width:600px){
+    .section{margin:20px; padding:24px;}
+    header h1{font-size:1.8rem;}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a href="index.html" class="back">← Quay lại Dashboard</a>
-  <h1>PHASE 2 — Sơ cấp 2 – Game Đầu Tiên</h1>
-  <div class="header-note">Độ tuổi: <strong>6–8 tuổi</strong></div>
 
-  <div class="card">
-    <div class="section-title">Chủ đề</div>
-    <p><strong>Làm quen Scratch / Blockly</strong>, học điều kiện “nếu – thì”.</p>
+<header>
+  <h1>🎮 Sơ cấp 2 – Game Đầu Tiên</h1>
+  <p>Chủ đề: Làm quen Scratch / Blockly – học điều kiện “Nếu – Thì”</p>
+</header>
+
+<section class="section">
+  <h2>🌟 Mục tiêu học tập (Learning Goals)</h2>
+  <ul>
+    <li>Hiểu khái niệm lập trình khối lệnh (block-based coding).</li>
+    <li>Làm quen cấu trúc <b>“nếu – thì” (if – then)</b> trong lập trình.</li>
+    <li>Biết điều khiển nhân vật và phản hồi khi nhấn phím.</li>
+    <li>Phân biệt hành động, điều kiện, và kết quả trong trò chơi.</li>
+    <li>Rèn tư duy logic, sáng tạo và tự tin thử nghiệm.</li>
+  </ul>
+
+  <div class="highlight">
+    🎯 <b>Kết quả:</b> Bé tự tạo được mini-game hoặc website tĩnh bằng Scratch / Blockly.
   </div>
+</section>
 
-  <div class="card">
-    <div class="section-title">Sản phẩm</div>
-    <p><strong>Mini-game hoặc website tĩnh</strong> bé tự lập trình.</p>
+<section class="section">
+  <h2>🧠 Kiến thức & kỹ năng đạt được</h2>
+  <ul>
+    <li>Tư duy lập trình cơ bản: trình tự, điều kiện, vòng lặp.</li>
+    <li>Thiết kế nhân vật, phông nền và âm thanh trong trò chơi.</li>
+    <li>Hiểu cách kiểm tra điều kiện và đưa ra phản hồi.</li>
+    <li>Kỹ năng trình bày sản phẩm số và chia sẻ với người khác.</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>📦 Sản phẩm cuối khóa</h2>
+  <p>Bé hoàn thành <b>Mini-Game Đầu Tiên</b> hoặc <b>Website Tĩnh</b> tự lập trình.</p>
+  <p>Xuất file <code>.html</code> và in kèm QR code để mọi người có thể <b>“Chơi thử game của con”</b> 📱</p>
+
+  <div class="cta">
+    <button>🎮 Xem thử Game của con</button>
   </div>
+</section>
 
-  <div class="card">
-    <div class="section-title">Hình thức</div>
-    <p><strong>Xuất HTML + in QR “Chơi thử game của con”.</strong></p>
-  </div>
-</div>
+<footer>
+  © 2025 HYPER ONE | AI Storybook – Sơ cấp 2
+</footer>
 
-<div class="watermark">🔒 TÀI LIỆU MẬT – KHÔNG PHỔ BIẾN RA NGOÀI</div>
 </body>
 </html>
