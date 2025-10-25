@@ -2,154 +2,180 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sơ cấp 2 – Game Đầu Tiên | AI Storybook</title>
-<meta name="description" content="AI Storybook – Sơ cấp 2: Làm quen Scratch / Blockly, học điều kiện nếu–thì, tự lập trình mini-game đầu tiên.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AI Storybook — Sơ cấp 2 | Game Đầu Tiên</title>
+<meta name="description" content="Giáo trình Sơ cấp 2 — AI Storybook: Làm quen Scratch / Blockly, học điều kiện nếu–thì. Sản phẩm: Mini-game hoặc website tĩnh bé tự lập trình.">
 
 <style>
-  :root {
-    --bg: #f7fbff;
-    --ink: #1a1f36;
-    --muted: #667799;
-    --ai-blue: #2eaaff;
-    --ai-orange: #ffb84d;
-    --card: #ffffff;
-    --line: #e0e8f0;
+  :root{
+    --bg:#070b13;
+    --bg-2:#0b1220;
+    --ink:#ecf3ff;
+    --muted:#9bb2cc;
+    --line:#1d2736;
+    --ai:#2eaaff;
+    --ai-2:#8bffd8;
+    --gold:#ffb84d;
+    --ok:#00d28f;
+    --danger:#ff4d6d;
+    --radius:16px;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
   }
-
-  body {
-    margin: 0;
-    font-family: "Inter", system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-  }
-
-  header {
-    text-align: center;
-    padding: 40px 16px 20px;
-  }
-
-  header h1 {
-    font-size: 2.2rem;
-    color: var(--ai-blue);
-    margin-bottom: 8px;
-  }
-
-  header p {
-    color: var(--muted);
-    font-size: 1rem;
-    margin: 0;
-  }
-
-  .section {
-    max-width: 800px;
-    margin: 40px auto;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    padding: 32px;
-  }
-
-  .section h2 {
-    color: var(--ai-orange);
-    font-size: 1.4rem;
-    margin-top: 0;
-  }
-
-  .section ul {
-    padding-left: 20px;
-    line-height: 1.6;
-  }
-
-  .highlight {
-    background: linear-gradient(120deg, #2eaaff22, #ffb84d22);
-    padding: 12px 16px;
-    border-radius: 12px;
-    margin: 20px 0;
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .cta {
-    text-align: center;
-    margin-top: 40px;
-  }
-
-  .cta button {
-    background: var(--ai-blue);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 14px 28px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.25s;
-  }
-
-  .cta button:hover {
-    background: var(--ai-orange);
-    transform: scale(1.05);
-  }
-
-  footer {
-    text-align: center;
-    padding: 30px 0 50px;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  @media (max-width:600px){
-    .section{margin:20px; padding:24px;}
-    header h1{font-size:1.8rem;}
-  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;color:var(--ink);
+    background:
+      radial-gradient(1000px 600px at 70% -10%, #14283d 0%, #0b1220 55%, #070b13 100%),
+      linear-gradient(180deg,#091221 0%,#070b13 100%);
+    font-family:ui-sans-serif,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+  a{color:var(--ai)}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px;}
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0 8px;border-bottom:1px dashed var(--line);}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--ai),var(--ai-2));box-shadow:0 8px 20px rgba(46,170,255,.35);}
+  .brand h1{margin:0;font-size:18px;font-weight:700;}
+  .tagline{color:var(--muted);font-size:13px;}
+  .btn{appearance:none;border:1px solid rgba(255,255,255,.12);color:var(--ink);
+    background:linear-gradient(180deg,#0e1828,#0b1422);padding:10px 14px;border-radius:12px;
+    font-weight:600;font-size:14px;cursor:pointer;transition:.2s;}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(46,170,255,.2);border-color:rgba(46,170,255,.5);}
+  .btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--ai),var(--ai-2));color:#021018;}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;padding:26px 0 10px;}
+  @media(max-width:990px){.hero{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:var(--radius);
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+    box-shadow:var(--shadow);padding:18px;position:relative;overflow:hidden;}
+  .card h2{margin:0 0 12px;font-size:22px;}
+  .card p{color:var(--muted);}
+  .scan{position:absolute;inset:0;border-radius:inherit;pointer-events:none;}
+  .scan::before{content:"";position:absolute;inset:-2px;border-radius:inherit;
+    background:conic-gradient(from 0deg,rgba(46,170,255,0)0deg,rgba(46,170,255,.5)90deg,rgba(139,255,216,.5)140deg,rgba(46,170,255,0)220deg);
+    filter:blur(8px);opacity:.35;animation:spin 8s linear infinite;}
+  @keyframes spin{to{transform:rotate(1turn)}}
+  .kp{padding:12px;border:1px solid var(--line);border-radius:12px;background:#0b1524;font-size:13.5px;color:var(--ink);}
+  .kp small{color:var(--muted);}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);}
+  @media(max-width:990px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .phase{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:16px;padding:14px;
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));transition:.2s;}
+  .phase:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.4);border-color:rgba(46,170,255,.35);}
+  .label{display:flex;align-items:center;gap:8px;font-weight:700;}
+  .badge{padding:4px 8px;border-radius:10px;font-size:12px;font-weight:700;color:#031018;background:linear-gradient(135deg,var(--ai),var(--ai-2));}
+  .age{color:var(--muted);font-size:12px;}
+  .phase ul{margin:8px 0 0 18px;}
+  .phase li{margin:6px 0;}
+  .result{margin-top:10px;font-size:13.5px;color:#d7e7ff;border-top:1px dashed var(--line);padding-top:8px;}
+  footer{margin:30px 0 10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;}
+  .float{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.12;
+    background:radial-gradient(10px 10px at 15% 25%,#2eaaff 0%,transparent 60%),radial-gradient(7px 7px at 80% 20%,#8bffd8 0%,transparent 60%),radial-gradient(8px 8px at 70% 70%,#2eaaff 0%,transparent 60%),radial-gradient(6px 6px at 30% 80%,#8bffd8 0%,transparent 60%);
+    animation:drift 18s ease-in-out infinite alternate;}
+  @keyframes drift{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>🎮 Sơ cấp 2 – Game Đầu Tiên</h1>
-  <p>Chủ đề: Làm quen Scratch / Blockly – học điều kiện “Nếu – Thì”</p>
-</header>
+<div class="float" aria-hidden="true"></div>
+<div class="wrap">
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <h1>AI Storybook — Sơ cấp 2</h1>
+        <div class="tagline">Chủ đề: <b>Game Đầu Tiên</b> • Sản phẩm: <b>Mini-game / Website tĩnh</b></div>
+      </div>
+    </div>
+    <nav>
+      <button class="btn primary" onclick="document.getElementById('phase').scrollIntoView({behavior:'smooth'})">Xem lộ trình</button>
+    </nav>
+  </header>
 
-<section class="section">
-  <h2>🌟 Mục tiêu học tập (Learning Goals)</h2>
-  <ul>
-    <li>Hiểu khái niệm lập trình khối lệnh (block-based coding).</li>
-    <li>Làm quen cấu trúc <b>“nếu – thì” (if – then)</b> trong lập trình.</li>
-    <li>Biết điều khiển nhân vật và phản hồi khi nhấn phím.</li>
-    <li>Phân biệt hành động, điều kiện, và kết quả trong trò chơi.</li>
-    <li>Rèn tư duy logic, sáng tạo và tự tin thử nghiệm.</li>
-  </ul>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="card">
+      <div class="scan"></div>
+      <h2>🎯 Mục tiêu chương trình</h2>
+      <p>Giúp trẻ 7–12 tuổi làm quen lập trình khối lệnh qua Scratch / Blockly, hiểu cấu trúc <b>“Nếu – Thì”</b>, và tạo mini-game đầu tiên mang dấu ấn cá nhân.</p>
+      <div class="kp">✅ Kết quả: <b>01 mini-game</b> hoạt động, xuất file <b>HTML + QR chơi thử</b>.</div>
+    </div>
 
-  <div class="highlight">
-    🎯 <b>Kết quả:</b> Bé tự tạo được mini-game hoặc website tĩnh bằng Scratch / Blockly.
+    <div class="card">
+      <div class="scan"></div>
+      <h2>🧩 Kỹ năng phát triển</h2>
+      <ul>
+        <li>Hiểu tư duy điều kiện & hành động trong game.</li>
+        <li>Thiết kế nhân vật và bối cảnh đơn giản.</li>
+        <li>Ghép lệnh logic – chạy thử và sửa lỗi.</li>
+        <li>Chia sẻ game qua QR để bạn bè cùng chơi.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PHASES -->
+  <h3 id="phase" style="margin:26px 0 14px;font-size:18px;">🕹️ Lộ trình 5 PHASE</h3>
+  <div class="grid">
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="label">🎲 <span class="badge">Phase 1</span> Làm quen lập trình</div>
+      <div class="age">Tuổi: 7–12</div>
+      <ul>
+        <li>Giới thiệu Scratch / Blockly, giao diện khối lệnh.</li>
+        <li>Thử tạo nhân vật di chuyển, nhảy, phát âm thanh.</li>
+      </ul>
+      <div class="result">🎯 Kết quả: Bé hiểu cấu trúc lệnh cơ bản.</div>
+    </article>
+
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="label">⚙️ <span class="badge">Phase 2</span> Học điều kiện “Nếu – Thì”</div>
+      <div class="age">Tuổi: 7–12</div>
+      <ul>
+        <li>Tạo quy tắc: “Nếu chạm tường → quay lại”.</li>
+        <li>Thêm điểm khi nhân vật thu vật phẩm.</li>
+      </ul>
+      <div class="result">🧠 Kết quả: Biết dùng <b>if–then</b> điều khiển hành vi.</div>
+    </article>
+
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="label">🎨 <span class="badge">Phase 3</span> Thiết kế giao diện & nhân vật</div>
+      <div class="age">Tuổi: 8–12</div>
+      <ul>
+        <li>Vẽ hoặc chọn nhân vật, nền, vật cản.</li>
+        <li>Tạo hoạt ảnh khi nhấn phím hoặc va chạm.</li>
+      </ul>
+      <div class="result">🎨 Kết quả: Giao diện mini-game hoàn chỉnh.</div>
+    </article>
+
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="label">🚀 <span class="badge">Phase 4</span> Lập trình & thử nghiệm</div>
+      <div class="age">Tuổi: 9–12</div>
+      <ul>
+        <li>Kết hợp chuyển động, điều kiện, điểm số.</li>
+        <li>Chạy thử – sửa lỗi – hoàn thiện gameplay.</li>
+      </ul>
+      <div class="result">💻 Kết quả: Game hoạt động ổn định.</div>
+    </article>
+
+    <article class="phase">
+      <div class="scan"></div>
+      <div class="label">🏁 <span class="badge">Phase 5</span> Xuất bản & chia sẻ</div>
+      <div class="age">Tuổi: 9–12</div>
+      <ul>
+        <li>Xuất file HTML hoặc link Scratch.</li>
+        <li>Tạo mã QR “Chơi thử game của con”.</li>
+        <li>Tổ chức mini showcase tại lớp.</li>
+      </ul>
+      <div class="result">📱 Kết quả: Bé có thể khoe game qua QR.</div>
+    </article>
   </div>
-</section>
 
-<section class="section">
-  <h2>🧠 Kiến thức & kỹ năng đạt được</h2>
-  <ul>
-    <li>Tư duy lập trình cơ bản: trình tự, điều kiện, vòng lặp.</li>
-    <li>Thiết kế nhân vật, phông nền và âm thanh trong trò chơi.</li>
-    <li>Hiểu cách kiểm tra điều kiện và đưa ra phản hồi.</li>
-    <li>Kỹ năng trình bày sản phẩm số và chia sẻ với người khác.</li>
-  </ul>
-</section>
-
-<section class="section">
-  <h2>📦 Sản phẩm cuối khóa</h2>
-  <p>Bé hoàn thành <b>Mini-Game Đầu Tiên</b> hoặc <b>Website Tĩnh</b> tự lập trình.</p>
-  <p>Xuất file <code>.html</code> và in kèm QR code để mọi người có thể <b>“Chơi thử game của con”</b> 📱</p>
-
-  <div class="cta">
-    <button>🎮 Xem thử Game của con</button>
-  </div>
-</section>
-
-<footer>
-  © 2025 HYPER ONE | AI Storybook – Sơ cấp 2
-</footer>
-
+  <!-- FOOTER -->
+  <footer>
+    <div>© 2025 HYPER ONE</div>
+    <div>AI Storybook — Sơ cấp 2 | Game Đầu Tiên</div>
+  </footer>
+</div>
 </body>
 </html>
